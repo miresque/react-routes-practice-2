@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 function EditProductPage(props) {
 
@@ -23,6 +24,15 @@ function EditProductPage(props) {
   function handleSubmit(event) {
     event.preventDefault();
   }
+
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.state) {
+      const { product } = location.state;
+      setProductToUpdate(product);
+    }
+  }, [location]);
 
   if (!productToUpdate) return <div>Loading...</div>;
 
